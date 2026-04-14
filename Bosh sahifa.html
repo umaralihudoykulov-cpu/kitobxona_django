@@ -1,215 +1,98 @@
+{% load static %}
 <!DOCTYPE html>
-<!-- saved from url=(0022)http://127.0.0.1:8000/ -->
-<html lang="uz"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bosh sahifa</title>
-    <link rel="stylesheet" href="./Bosh sahifa_files/uslub.css">
-    
+    <link rel="stylesheet" href="{% static 'css/uslub.css' %}">
 </head>
+
 <body>
 
-    <!-- HEADER QISMI -->
     <header class="header">
         <div class="container header-content">
-            <h1><a href="http://127.0.0.1:8000/" style="color:white; text-decoration:none;">🚀 Mening Ajoyib Blogim</a></h1>
+            <h1><a href="{% url 'home' %}" style="color:white; text-decoration:none;">🚀 Mening Ajoyib Blogim</a></h1>
             
-            <!-- Qidiruv Formasi -->
-            <form action="http://127.0.0.1:8000/qidiruv/" method="GET" class="search-form">
-                <input type="text" name="q" placeholder="Qidirish..." value="">
+            <form action="{% url 'search' %}" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Qidirish..." value="{{ request.GET.q }}">
                 <button type="submit">🔍</button>
             </form>
         </div>
     </header>
 
-    <!-- MENU QISMI -->
     <nav class="menu">
         <div class="container">
-            <a href="http://127.0.0.1:8000/">🏠 Bosh Sahifa</a>
-            <a href="http://127.0.0.1:8000/ommabop/">🔥 Ommabop</a>
-            <a href="http://127.0.0.1:8000/biz-haqimizda/">👥 Biz Haqimizda</a>
-            <a href="http://127.0.0.1:8000/portfolio/">💼 Portfolio</a>
-
+            <a href="{% url 'home' %}">🏠 Bosh Sahifa</a>
             
-                <a href="http://127.0.0.1:8000/kirish/">🔐 Kirish</a>
-                <a href="http://127.0.0.1:8000/royxatdan-otish/">📝 Ro'yxatdan O'tish</a>
+            <a href="{% url 'cart' %}">🛒 Savatcha</a>
             
+            <a href="#">🔥 Ommabop</a>
+            <a href="#">👥 Biz Haqimizda</a>
+            <a href="{% url 'checkout' %}">💼 To'lov (Checkout)</a>
 
-            <a href="http://127.0.0.1:8000/aloqa/">📧 Aloqa</a>
+            {% if user.is_authenticated %}
+                <span style="color: white; margin-left: 10px;">👤 {{ user.username }}</span>
+                <a href="/admin/logout/">🚪 Chiqish</a>
+            {% else %}
+                <a href="/admin/login/">🔐 Kirish</a>
+            {% endif %}
+
+            <a href="#">📧 Aloqa</a>
         </div>
     </nav>
 
-    <!-- ASOSIY KONTENT QISMI -->
     <main class="content">
         <div class="container">
             
+            <div class="posts-grid">
+                {% if posts %}
+                    {% for post in posts %}
+                        <article class="post-card">
+                            <div class="post-card-content">
+                                <h3 class="post-title">{{ post.title|default:"Sport" }}</h3>
 
-            
-<style>
-    :root {
-        --primary-color: #2563eb;
-        --text-main: #1f2937;
-        --text-muted: #6b7280;
-        --bg-card: #ffffff;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+                                <div class="post-meta">
+                                    <span>👤 {{ post.author|default:"aka" }}</span>
+                                    <span>•</span>
+                                    <span>📅 {{ post.created_at|date:"d M, Y"|default:"08 Apr, 2026" }}</span>
+                                </div>
 
-    /* Grid konteyneri */
-    .posts-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 2rem;
-        padding: 1.5rem 0;
-    }
+                                <p class="post-text">
+                                    {{ post.description|truncatewords:20|default:"salom" }}
+                                </p>
 
-    /* Karta dizayni */
-    .post-card {
-        background: var(--bg-card);
-        border-radius: 16px;
-        overflow: hidden;
-        border: 1px solid #e5e7eb;
-        transition: var(--transition);
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .post-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
-        border-color: var(--primary-color);
-    }
-
-    /* Rasm qismi */
-    .post-image-wrapper {
-        position: relative;
-        width: 100%;
-        height: 200px;
-        overflow: hidden;
-        background: #f3f4f6;
-    }
-
-    .post-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: var(--transition);
-    }
-
-    .post-card:hover .post-image {
-        transform: scale(1.05);
-    }
-
-    /* Kontent qismi */
-    .post-card-content {
-        padding: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-    }
-
-    .post-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-main);
-        margin-bottom: 0.75rem;
-        line-height: 1.4;
-    }
-
-    .post-meta {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        margin-bottom: 1rem;
-    }
-
-    .post-text {
-        font-size: 0.95rem;
-        color: #4b5563;
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-        flex-grow: 1;
-    }
-
-    /* Tugma */
-    .btn-read-more {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.6rem 1.2rem;
-        background-color: var(--primary-color);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        transition: var(--transition);
-        width: fit-content;
-    }
-
-    .btn-read-more:hover {
-        background-color: #1d4ed8;
-        gap: 8px; /* O'q belgisi siljishi uchun */
-    }
-
-    /* Bo'sh holat */
-    .no-posts {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 4rem 2rem;
-        background: #f9fafb;
-        border-radius: 12px;
-        color: var(--text-muted);
-    }
-
-    /* Responsive moslashuv */
-    @media (max-width: 640px) {
-        .posts-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
-
-<div class="posts-grid">
-    
-        <article class="post-card">
-            
-            
-
-            <div class="post-card-content">
-                <h3 class="post-title">Sport</h3>
-
-                <div class="post-meta">
-                    <span>👤 aka</span>
-                    <span>•</span>
-                    <span>📅 08 Apr, 2026</span>
-                </div>
-
-                <p class="post-text">
-                    salom
-                </p>
-
-                <a href="http://127.0.0.1:8000/post/1/" class="btn-read-more">
-                    Batafsil o‘qish &nbsp; <span>→</span>
-                </a>
+                                <a href="{% url 'home' %}" class="btn-read-more">
+                                    Batafsil o‘qish &nbsp; <span>→</span>
+                                </a>
+                            </div>
+                        </article>
+                    {% endfor %}
+                {% else %}
+                    <article class="post-card">
+                        <div class="post-card-content">
+                            <h3 class="post-title">Sport</h3>
+                            <div class="post-meta">
+                                <span>👤 aka</span>
+                                <span>•</span>
+                                <span>📅 08 Apr, 2026</span>
+                            </div>
+                            <p class="post-text">salom</p>
+                            <a href="{% url 'home' %}" class="btn-read-more">Batafsil o‘qish →</a>
+                        </div>
+                    </article>
+                {% endif %}
             </div>
-
-        </article>
-    
-</div>
 
         </div>
     </main>
 
-    <!-- FOOTER QISMI -->
     <footer class="footer">
         <div class="container">
             <p>© 2026 Mening Blogim. Barcha huquqlar himoyalangan.</p>
         </div>
     </footer>
 
-    
-
-</body></html>
+</body>
+</html>

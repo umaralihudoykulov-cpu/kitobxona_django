@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<form method="GET" action="{% url 'search' %}" class="mb-4">
+    <input type="text" name="q" class="form-control" placeholder="Kitob qidirish...">
+</form>
+<html>
+<head>
+    <title>Kutubxona</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">📚 Kitoblar</h1>
+
+    <div class="row">
+
+        {% for book in books %}
+        <div class="col-md-4">
+
+            <div class="card mb-4 shadow">
+
+                {% if book.image %}
+                <img src="{{ book.image.url }}" class="card-img-top" style="height:250px; object-fit:cover;">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">Muallif: {{ book.author }}</p>
+                    <p class="card-text"><b>{{ book.price }} so‘m</b></p>
+
+                    <a href="{% url 'book_detail' book.id %}" class="btn btn-primary">
+                        Batafsil
+                    </a>
+                    <a href="{% url 'add_to_cart' book.id %}" class="btn btn-success">
+                        🛒 Savatga qo‘shish
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

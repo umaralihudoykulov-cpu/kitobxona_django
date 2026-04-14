@@ -1,0 +1,280 @@
+/* 6. Tugmalar - Gradient effektli */
+.btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+    box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+.btn-danger { background: linear-gradient(135deg, #f43f5e, #e11d48); }
+.btn-secondary { background: #64748b; }
+
+/* 7. Xabarlar (Alerts) */
+.alert {
+    padding: 18px 25px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.alert-success { background: #d1fae5; color: #065f46; border: 1px solid #34d399; }
+.alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
+
+/* 8. Responsive Design */
+@media (max-width: 900px) {
+    .main-layout { flex-direction: column; }
+    .content { padding: 25px; margin: 20px; }
+    .header h1 { font-size: 2rem; }
+}
+
+
+.forma-file {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px dashed #667eea;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.forma-file:hover {
+    border-color: #764ba2;
+    background-color: #e9ecef;
+}
+
+
+.post-card {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 0;  /* O'zgartiramiz */
+    margin: 20px 0;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.post-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.post-card-content {
+    padding: 25px;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.post-detail-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+.profil-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.profil-header {
+    display: flex;
+    gap: 30px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.profil-rasm {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #667eea;
+}
+
+.profil-info {
+    flex: 1;
+}
+
+.profil-info h1 {
+    color: #667eea;
+    margin: 0 0 10px 0;
+}
+
+.profil-ism {
+    color: #666;
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+
+.profil-bio {
+    color: #444;
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.profil-stats {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 1.5em;
+    color: #667eea;
+}
+
+.stat span {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.no-posts {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 1.2em;
+}
+
+.profil-edit-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.current-profile-pic {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.current-profile-pic img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #667eea;
+}
+
+fieldset {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+legend {
+    color: #667eea;
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+
+
+
+.profil-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.profil-header {
+    display: flex;
+    gap: 30px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.profil-rasm {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #667eea;
+}
+
+.profil-info {
+    flex: 1;
+}
+
+.profil-info h1 {
+    color: #667eea;
+    margin: 0 0 10px 0;
+}
+
+.profil-ism {
+    color: #666;
+    font-size: 1.1em;
+    margin: 5px 0;
+}
+
+.profil-bio {
+    color: #444;
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.profil-stats {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-size: 1.5em;
+    color: #667eea;
+}
+
+.stat span {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.no-posts {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 1.2em;
+}
